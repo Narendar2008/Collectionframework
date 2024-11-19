@@ -122,3 +122,81 @@ keySet() - Returns a set of all the keys present in a map.
 values() - Returns a set of all the values present in a map.
 entrySet() - Returns a set of all the key/value mapping present in a map.
 ```
+
+```java
+import java.util.*;
+
+
+class MapExample {
+
+    public static void main(String[] args) {
+     Map<String,Integer> playerScores=new HashMap<>();
+     // put(K, V) - Add player scores
+        playerScores.put("Virat Kohli", 85);
+        playerScores.put("MS Dhoni", 72);
+        playerScores.put("Rohit Sharma", 120);
+        System.out.println("After put(): " + playerScores);
+
+        // putAll() - Add scores from another map
+        Map<String, Integer> additionalScores = new HashMap<>();
+        additionalScores.put("KL Rahul", 91);
+        additionalScores.put("Jasprit Bumrah", 15);
+        playerScores.putAll(additionalScores);
+        System.out.println("After putAll(): " + playerScores);
+
+        // putIfAbsent(K, V) - Add player only if not already present
+        playerScores.putIfAbsent("MS Dhoni", 50); // Key already exists
+        playerScores.putIfAbsent("Hardik Pandya", 45); // New key
+        System.out.println("After putIfAbsent(): " + playerScores);
+
+        // get(K) - Get score for a specific player
+        System.out.println("Score of Virat Kohli: " + playerScores.get("Virat Kohli"));
+        System.out.println("Score of unknown player: " + playerScores.get("Suresh Raina"));
+
+        // getOrDefault(K, defaultValue) - Get score or default value
+        System.out.println("Score of unknown player or default: " + playerScores.getOrDefault("Suresh Raina", 0));
+
+        // containsKey(K) - Check if a player exists in the map
+        System.out.println("Does MS Dhoni exist? " + playerScores.containsKey("MS Dhoni"));
+        System.out.println("Does Yuvraj Singh exist? " + playerScores.containsKey("Yuvraj Singh"));
+
+        // containsValue(V) - Check if a score exists in the map
+        System.out.println("Does score 120 exist? " + playerScores.containsValue(120));
+        System.out.println("Does score 200 exist? " + playerScores.containsValue(200));
+
+        // replace(K, V) - Update score for a player
+        playerScores.replace("Rohit Sharma", 140);
+        System.out.println("After replace(key, value): " + playerScores);
+
+     // replace(K, oldValue, newValue) - Update score only if old value matches
+        boolean replaced = playerScores.replace("KL Rahul", 91, 100);
+        System.out.println("After replace(key, oldValue, newValue): " + playerScores);
+        System.out.println("Was replace successful? " + replaced);
+
+         // remove(K) - Remove a player by name
+        playerScores.remove("Jasprit Bumrah");
+        System.out.println("After remove(key): " + playerScores);
+
+         // remove(K, V) - Remove a player by name and score
+        boolean removed = playerScores.remove("Hardik Pandya", 45);
+        System.out.println("After remove(key, value): " + playerScores);
+        System.out.println("Was remove successful? " + removed);
+
+         // keySet() - Get a set of all player names
+        Set<String> players = playerScores.keySet();
+        System.out.println("Players: " + players);
+
+        // values() - Get a collection of all scores
+        Collection<Integer> scores = playerScores.values();
+        System.out.println("Scores: " + scores);
+
+        // entrySet() - Get a set of all player-score pairs
+        Set<Map.Entry<String, Integer>> entries = playerScores.entrySet();
+        System.out.println("Player-Score Entries: ");
+        for (Map.Entry<String, Integer> entry : entries) {
+            System.out.println(entry.getKey() + " = " + entry.getValue());
+        }
+
+    }
+}
+```
